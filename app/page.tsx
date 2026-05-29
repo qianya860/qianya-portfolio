@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { ProjectCard } from "@/components/project-card"
 import { SkillBadge } from "@/components/skill-badge"
 import { Timeline } from "@/components/timeline"
-import { ContactForm } from "@/components/contact-form"
 import { CreativeHero } from "@/components/creative-hero"
 import { FloatingNav } from "@/components/floating-nav"
 import { MouseFollower } from "@/components/mouse-follower"
@@ -48,20 +47,7 @@ export default function Portfolio() {
             <p className="text-xl text-zinc-400 max-w-[600px]">
               深耕新媒体运营与内容创制四年
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button className="relative overflow-hidden group bg-gradient-to-r from-purple-500 to-pink-500 border-0">
-                <span className="relative z-10 flex items-center">
-                  探索视界 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              </Button>
-              <Button
-                variant="outline"
-                className="border-zinc-700 text-pink-500 hover:text-pink-700 hover:border-zinc-500"
-              >
-                与我联络
-              </Button>
-            </div>
+            
             <div className="flex gap-4 pt-4">
               {/* 微信 */}
               <Button
@@ -111,10 +97,12 @@ export default function Portfolio() {
         <div className="container relative z-10">
           <SectionHeading title="视界与沉淀 / ABOUT" subtitle="My background and journey" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-16">
-            <div className="relative group">
+          {/* 将 items-center 改为 items-stretch 确保左右等高 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch mt-16">
+            <div className="relative group h-full">
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-zinc-500/20 to-zinc-700/20 blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-700"></div>
-              <div className="relative aspect-square rounded-xl overflow-hidden border border-zinc-800/50 bg-zinc-900/30 backdrop-blur-xl transition-all duration-500 group-hover:border-zinc-700/50">
+              {/* 移除 aspect-square，使用 h-full 和最小高度，确保适配内容高度 */}
+              <div className="relative h-full min-h-[400px] w-full rounded-xl overflow-hidden border border-zinc-800/50 bg-zinc-900/30 backdrop-blur-xl transition-all duration-500 group-hover:border-zinc-700/50">
                 <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-zinc-600/10 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute -bottom-1/4 -right-1/4 w-2/3 h-2/3 bg-zinc-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center opacity-40 group-hover:opacity-100 transition-opacity duration-700">
@@ -134,7 +122,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="h-full [&>div]:h-full">
               <GlassmorphicCard>
                 <p className="text-lg text-zinc-300 leading-relaxed">
                   拥有 4 年新媒体全平台运营经验,熟悉微信生态(公众号、视频号)及抖音、小红书等主流平台的运营逻辑与从0-1搭建的完整流程。得益于数字媒体艺术的专业背景，我能够兼顾排版审美与基础设计、剪辑，确保优质内容高效落地。
@@ -349,12 +337,14 @@ export default function Portfolio() {
         <div className="container relative z-10">
           <SectionHeading title="与我联络 / CONTACT" subtitle="期待探讨关于品牌视觉与内容的更多可能" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mt-16">
+          {/* 移除表单，只留档案框，并设为居中单列宽幅 */}
+          <div className="max-w-2xl mx-auto mt-16">
             <GlassmorphicCard>
-              <h3 className="text-2xl font-light mb-8 text-zinc-200 tracking-wide">联络档案</h3>
-              <div className="space-y-8">
-                <div className="flex items-center gap-5 group">
-                  <div className="w-14 h-14 rounded-full bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center group-hover:bg-zinc-700 transition-colors">
+              <h3 className="text-2xl font-light mb-8 text-zinc-200 tracking-wide text-center">联络档案</h3>
+              <div className="space-y-8 flex flex-col items-center">
+                
+                <div className="flex items-center gap-5 group w-full max-w-sm">
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center group-hover:bg-zinc-700 transition-colors">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 text-zinc-300">
                       <path d="M8.53 13.92c-3.52 0-6.38-2.4-6.38-5.36 0-2.96 2.86-5.36 6.38-5.36 3.52 0 6.38 2.4 6.38 5.36 0 .42-.06.83-.17 1.22-1.27-.47-2.7-.76-4.21-.76-4.63 0-8.38 3.12-8.38 6.97 0 .6.11 1.18.3 1.74-.29 1.13-1.12 2.37-1.12 2.37s1.39-.33 2.62-1.04c.82.26 1.69.41 2.58.41.83 0 1.63-.13 2.39-.37-.53-1.42-.81-2.97-.81-4.57 0-.21.01-.41.02-.61zm7.47-3.42c3.52 0 6.38 2.4 6.38 5.36s-2.86 5.36-6.38 5.36c-.89 0-1.75-.15-2.58-.41-1.23.71-2.62 1.04-2.62 1.04s.83-1.24 1.12-2.37c-.6-.79-.96-1.77-.96-2.82 0-2.96 2.86-5.36 6.38-5.36zM6.92 6.51c.36 0 .65.29.65.65s-.29.65-.65.65-.65-.29-.65-.65.29-.65.65-.65zm3.22 0c.36 0 .65.29.65.65s-.29.65-.65.65-.65-.29-.65-.65.29-.65.65-.65zm4.08 5.37c.36 0 .65.29.65.65s-.29.65-.65.65-.65-.29-.65-.65.29-.65.65-.65zm3.22 0c.36 0 .65.29.65.65s-.29.65-.65.65-.65-.29-.65-.65.29-.65.65-.65z"/>
                     </svg>
@@ -365,8 +355,8 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-5 group">
-                  <div className="w-14 h-14 rounded-full bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center group-hover:bg-zinc-700 transition-colors">
+                <div className="flex items-center gap-5 group w-full max-w-sm">
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center group-hover:bg-zinc-700 transition-colors">
                     <Mail className="h-6 w-6 text-zinc-300" />
                   </div>
                   <div>
@@ -374,11 +364,12 @@ export default function Portfolio() {
                     <div className="font-medium text-zinc-200">860589339@qq.com</div>
                   </div>
                 </div>
+
               </div>
 
-              <div className="mt-10 pt-8 border-t border-zinc-800/50">
+              <div className="mt-10 pt-8 border-t border-zinc-800/50 text-center">
                 <h4 className="text-sm text-zinc-500 tracking-wider uppercase mb-4">当前状态 / Status</h4>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <div className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -387,8 +378,6 @@ export default function Portfolio() {
                 </div>
               </div>
             </GlassmorphicCard>
-
-            <ContactForm />
           </div>
         </div>
       </section>

@@ -10,11 +10,11 @@ import { Badge } from "@/components/ui/badge"
 
 interface ProjectCardProps {
   title: string
-  description: string
+  description?: string
   tags: string[]
   image: string
-  demoUrl: string
-  repoUrl: string
+  demoUrl?: string
+  repoUrl?: string
 }
 
 export function ProjectCard({ title, description, tags, image, demoUrl, repoUrl }: ProjectCardProps) {

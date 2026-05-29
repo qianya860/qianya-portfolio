@@ -1,123 +1,50 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-import { useMobile } from "@/hooks/use-mobile"
+import { useEffect, useState } from "react"
 
 export function FloatingNav() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const isMobile = useMobile()
+  const [isScrolled, setIsScrolled] = useState(false)
 
+  // 监听滚动，如果往下滑动了，给导航栏加更深的毛玻璃和阴影
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      setIsScrolled(window.scrollY > 50)
     }
-
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ]
-
-  const handleNavClick = () => {
-    if (isMobile) {
-      setIsOpen(false)
-    }
-  }
-
   return (
-    <>
-      <motion.div
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-        initial={{ y: -100 }}
-        animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.3 }}
+    // fixed, top-6, left-1/2, -translate-x-1/2 是让它“顶部绝对居中”的魔法代码
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300">
+      <nav 
+        className={`flex items-center gap-1 sm:gap-2 px-6 py-3 rounded-full border transition-all duration-300 ${
+          isScrolled 
+            ? "bg-zinc-950/80 backdrop-blur-md border-zinc-800/50 shadow-2xl shadow-black/50" 
+            : "bg-zinc-900/40 backdrop-blur-sm border-white/5"
+        }`}
       >
-        <div className="relative px-4 py-3 rounded-full bg-zinc-800/80 backdrop-blur-md border border-zinc-700/50 shadow-lg">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur opacity-50"></div>
-
-          {isMobile ? (
-            <div className="relative flex items-center justify-between">
-              <Link href="/" className="font-bold text-lg">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">倩雅</span>
-                <span className="text-white"></span>
-              </Link>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-zinc-400 hover:text-white hover:bg-zinc-700/50"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
-            </div>
-          ) : (
-            <div className="relative flex items-center gap-1">
-              <Link href="/" className="font-bold text-lg mr-4">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">倩雅</span>
-                <span className="text-white"></span>
-              </Link>
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors"
-                  onClick={handleNavClick}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <Button
-                size="sm"
-                className="ml-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0"
-              >
-                Resume
-              </Button>
-            </div>
-          )}
-        </div>
-      </motion.div>
-
-      {/* Mobile menu */}
-      {isMobile && (
-        <motion.div
-          className={`fixed inset-0 z-40 bg-black/90 backdrop-blur-md ${isOpen ? "block" : "hidden"}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isOpen ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="flex flex-col items-center justify-center h-full">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="px-8 py-4 text-2xl font-medium text-white hover:text-purple-400 transition-colors"
-                onClick={handleNavClick}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Button className="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0">
-              Resume
-            </Button>
-          </div>
-        </motion.div>
-      )}
-    </>
+        <Link href="#about" className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          关于
+        </Link>
+        <div className="w-1 h-1 rounded-full bg-zinc-700"></div>
+        <Link href="#skills" className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          技能
+        </Link>
+        <div className="w-1 h-1 rounded-full bg-zinc-700"></div>
+        <Link href="#projects" className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          作品
+        </Link>
+        <div className="w-1 h-1 rounded-full bg-zinc-700"></div>
+        <Link href="#experience" className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          履历
+        </Link>
+        <div className="w-1 h-1 rounded-full bg-zinc-700"></div>
+        <Link href="#contact" className="px-3 py-1 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          联络
+        </Link>
+      </nav>
+    </div>
   )
 }

@@ -38,7 +38,7 @@ export default function Portfolio() {
               </div>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              <span className="block mb-2 text-zinc-400">Hi, I'm</span>
+              <span className="block mb-2 text-zinc-400">Hi, I&apos;m</span>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
                 QIANYA LÜ
                 <br />

@@ -140,7 +140,7 @@ export default function Portfolio() {
                   </div>
                   <div className="space-y-1">
                     <div className="text-xs tracking-wider text-zinc-500 uppercase">到岗时间</div>
-                    <div className="font-medium text-zinc-200">6月15号后随时到岗</div>
+                    <div className="font-medium text-zinc-200">随时到岗</div>
                   </div>
                 </div>
               </GlassmorphicCard>
